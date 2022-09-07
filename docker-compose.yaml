@@ -1,0 +1,44 @@
+version: "3.8"
+services:
+ nginx:
+  container_name: nginx
+  image: nginx:latest
+  ports:
+   - target: 80
+     published: 80
+  volumes:
+   - type: bind
+     source: ./nginx.conf
+     target: /etc/nginx/nginx.conf
+  networks:
+   - 'football-match'
+  depends_on:
+   - 'front-end'
+ front-end:
+  image: subitgrg/front-end:latest
+  build: ./front-end
+  networks:
+   - 'football-match'
+ opp-s4:
+  image: subitgrg/opp-s4:latest
+  build: ./opp-s4
+  deploy:
+   replicas: 3
+  networks:
+   - 'football-match'
+ condition-s3:
+  image: subitgrg/condition-s3:latest
+  build: ./condition-s3
+  deploy:
+   replicas: 3
+  networks:
+   - 'football-match'
+ stadium-s2:
+  image: subitgrg/stadium-s2:latest
+  build: ./stadium-s2
+  deploy:
+   replicas: 3
+  networks:
+   - 'football-match'
+networks:
+  football-match:
