@@ -11,7 +11,7 @@ class TestBase(TestCase):
 
 class Test_condition(TestBase):
     @patch('application.routes.choice', return_value='Snowy')
-    def test_weather(self, mock_func):
+    def test_condition(self, mock_func):
         response = self.client.get(url_for('get_condition'))
         self.assert200(response)
         self.assertIn(b'Snowy', response.data)
