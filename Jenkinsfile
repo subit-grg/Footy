@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Build and Push'){
             environment {
-                DOCKER_CREDS = credentials('dockerlogin')
+                DOCKER_CREDS = credentials('docker-login')
             }
             steps {
                 sh "sudo docker-compose build "
