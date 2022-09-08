@@ -1,8 +1,9 @@
 pipeline {
     agent any
-    Stages {
-        Stage('Set-up'){
-            Steps {sh 'echo "'}
+    stages {
+        stage('Build images'){
+            steps {
+                sh 'cd Footy && docker-compose build'}
         }
     }
 }
