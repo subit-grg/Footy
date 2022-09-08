@@ -11,6 +11,7 @@ pipeline {
                 DOCKER_CREDS = credentials('docker-login')
             }
             steps {
+                sh "sudo sh install-compose.sh"
                 sh "sudo docker-compose build "
                 sh "sudo docker login -u ${DOCKER_CREDS_USR} -p ${DOCKER_CREDS_PSW}"
                 sh "sudo docker-compose push"
